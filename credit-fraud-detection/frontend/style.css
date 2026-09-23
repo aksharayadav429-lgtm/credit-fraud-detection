@@ -1,0 +1,384 @@
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #f4f6f8;
+
+    color: #222;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 40px auto;
+}
+
+
+h1 {
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+
+.description {
+    text-align: center;
+
+    color: #666;
+
+    margin-bottom: 30px;
+}
+
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.card h2 {
+    margin-top: 0;
+
+    margin-bottom: 20px;
+}
+
+
+.transaction-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+.input-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.input-group label {
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+
+.input-group input {
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+}
+
+
+.input-group input:focus {
+    outline: none;
+
+    border-color: #1976d2;
+}
+
+
+.predict-button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #1976d2;
+
+    color: white;
+}
+
+
+.predict-button:hover {
+    background: #125ca1;
+}
+
+
+.test-fraud-button {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #d32f2f;
+
+    color: white;
+}
+
+
+.test-fraud-button:hover {
+    background: #b71c1c;
+}
+
+
+.prediction-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+.result-box {
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background: #f5f7fa;
+
+    text-align: center;
+}
+
+
+.result-box h3 {
+    margin-top: 0;
+}
+
+
+.result-box p {
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-bottom: 0;
+}
+
+
+.threshold-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+#threshold {
+    flex: 1;
+
+    cursor: pointer;
+}
+
+
+#thresholdValue {
+    min-width: 60px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+.metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.metric-card {
+    padding: 20px;
+
+    text-align: center;
+
+    background: #f5f7fa;
+
+    border-radius: 10px;
+}
+
+
+.metric-card h3 {
+    margin-top: 0;
+}
+
+
+.metric-card p {
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+.confusion-matrix {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    max-width: 650px;
+
+    margin: auto;
+}
+
+
+.matrix-cell {
+    padding: 20px;
+
+    text-align: center;
+
+    border: 1px solid #ddd;
+
+    background: #f9fafb;
+}
+
+
+.matrix-cell.header {
+    font-weight: bold;
+
+    background: #eef1f5;
+}
+
+
+.matrix-cell span {
+    display: block;
+
+    font-size: 14px;
+
+    color: #666;
+
+    margin-bottom: 5px;
+}
+
+
+.matrix-cell strong {
+    font-size: 22px;
+}
+
+
+.chart-description {
+    color: #666;
+
+    line-height: 1.6;
+}
+
+
+.chart-container {
+    position: relative;
+
+    width: 100%;
+
+    height: 450px;
+
+    margin-top: 20px;
+}
+
+
+#performanceChart {
+    width: 100% !important;
+
+    height: 100% !important;
+}
+
+
+.status {
+    text-align: center;
+
+    font-weight: bold;
+
+    margin: 0;
+}
+
+
+@media (max-width: 768px) {
+
+    .transaction-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .prediction-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .metrics {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .chart-container {
+        height: 350px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .container {
+        width: 95%;
+    }
+
+
+    .metrics {
+        grid-template-columns: 1fr;
+    }
+
+
+    .confusion-matrix {
+        font-size: 14px;
+    }
+
+
+    .matrix-cell {
+        padding: 12px;
+    }
+
+}
+

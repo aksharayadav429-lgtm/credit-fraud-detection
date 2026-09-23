@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Credit Card Fraud Detection</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Credit Card Fraud Detection</h1>
+
+        <p class="description">
+            Detect potentially fraudulent credit card transactions
+            using a machine learning model.
+        </p>
+
+
+        <!-- TRANSACTION DETAILS -->
+
+        <div class="card">
+
+            <h2>Transaction Details</h2>
+
+            <div class="transaction-grid">
+
+                <div class="input-group">
+                    <label for="amount">
+                        Transaction Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        value="500"
+                        min="0"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="time">
+                        Transaction Time
+                    </label>
+
+                    <input
+                        type="number"
+                        id="time"
+                        value="10"
+                        min="0"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="locationScore">
+                        Location Score
+                    </label>
+
+                    <input
+                        type="number"
+                        id="locationScore"
+                        value="50"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="frequency">
+                        Transaction Frequency
+                    </label>
+
+                    <input
+                        type="number"
+                        id="frequency"
+                        value="5"
+                        min="0"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="deviceScore">
+                        Device Score
+                    </label>
+
+                    <input
+                        type="number"
+                        id="deviceScore"
+                        value="50"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+            </div>
+
+
+            <button
+                id="predictButton"
+                class="predict-button"
+            >
+                Predict Transaction
+            </button>
+
+
+            <button
+                id="testFraudButton"
+                class="test-fraud-button"
+            >
+                Test Fraud Transaction
+            </button>
+
+        </div>
+
+
+        <!-- PREDICTION RESULT -->
+
+        <div class="card">
+
+            <h2>Prediction Result</h2>
+
+            <div class="prediction-grid">
+
+                <div class="result-box">
+
+                    <h3>Prediction</h3>
+
+                    <p id="prediction">-</p>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <h3>Fraud Probability</h3>
+
+                    <p id="fraudProbability">-</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- THRESHOLD -->
+
+        <div class="card">
+
+            <h2>Classification Threshold</h2>
+
+            <div class="threshold-row">
+
+                <input
+                    type="range"
+                    id="threshold"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="0.50"
+                >
+
+                <span id="thresholdValue">
+                    0.50
+                </span>
+
+            </div>
+
+            <p>
+                Lower thresholds detect more possible fraud,
+                while higher thresholds require stronger evidence
+                before classifying a transaction as fraud.
+            </p>
+
+        </div>
+
+
+        <!-- MODEL PERFORMANCE -->
+
+        <div class="card">
+
+            <h2>Model Performance</h2>
+
+            <div class="metrics">
+
+                <div class="metric-card">
+                    <h3>Accuracy</h3>
+                    <p id="accuracy">-</p>
+                </div>
+
+
+                <div class="metric-card">
+                    <h3>Precision</h3>
+                    <p id="precision">-</p>
+                </div>
+
+
+                <div class="metric-card">
+                    <h3>Recall</h3>
+                    <p id="recall">-</p>
+                </div>
+
+
+                <div class="metric-card">
+                    <h3>F1 Score</h3>
+                    <p id="f1">-</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONFUSION MATRIX -->
+
+        <div class="card">
+
+            <h2>Confusion Matrix</h2>
+
+            <div class="confusion-matrix">
+
+                <div class="matrix-cell header">
+                    Actual / Predicted
+                </div>
+
+                <div class="matrix-cell header">
+                    Normal
+                </div>
+
+                <div class="matrix-cell header">
+                    Fraud
+                </div>
+
+
+                <div class="matrix-cell header">
+                    Normal
+                </div>
+
+                <div class="matrix-cell">
+                    <span>TN</span>
+                    <strong id="tn">-</strong>
+                </div>
+
+                <div class="matrix-cell">
+                    <span>FP</span>
+                    <strong id="fp">-</strong>
+                </div>
+
+
+                <div class="matrix-cell header">
+                    Fraud
+                </div>
+
+                <div class="matrix-cell">
+                    <span>FN</span>
+                    <strong id="fn">-</strong>
+                </div>
+
+                <div class="matrix-cell">
+                    <span>TP</span>
+                    <strong id="tp">-</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PERFORMANCE GRAPH -->
+
+        <div class="card">
+
+            <h2>Performance vs Threshold</h2>
+
+            <p class="chart-description">
+                This graph shows how Accuracy, Precision,
+                Recall and F1 Score change when the fraud
+                classification threshold changes.
+            </p>
+
+            <div class="chart-container">
+
+                <canvas id="performanceChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="card">
+
+            <p id="status" class="status">
+                Ready.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
