@@ -1,4 +1,3 @@
-
 const button =
     document.getElementById("predictButton");
 
@@ -234,15 +233,9 @@ testFraudButton.addEventListener(
 
 
         /*
-         * Use a 0.50 threshold.
+         * Keep the user's selected
+         * classification threshold.
          */
-
-        thresholdSlider.value =
-            0.50;
-
-        thresholdValue.textContent =
-            "0.50";
-
 
         status.textContent =
             "Testing a fraud transaction...";
